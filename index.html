@@ -74,6 +74,8 @@
             <label class="form-check-label" for="exampleCheck1">Featured GIF</label>
             </div>
             <button type="button" class="btn btn-primary" onclick="addPhoto()">Maak GIF</button>
+            <div id="loader">
+            </div>
           </p>
         </form>
         </div>
@@ -158,39 +160,47 @@ var s3 = new AWS.S3({
   // https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/s3-example-photo-album.html
   // Upload image
   function addPhoto() {
-  var albumName = document.getElementById("exampleInputEmail1").value;
+  var testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
 
-  var files = document.getElementById("file-input").files;
+  var albumName = document.getElementById("exampleInputEmail1").value;
+    if(albumName.match(testEmail)){
+      var files = document.getElementById("file-input").files;
   if (!files.length) {
     return alert("Please choose a file to upload first.");
   }
-    var file = files[0];
+  var voltooide=0;
+  updateLoader(voltooide,files.length)
+  for(var i=0;i<files.length;i++) {
+    var file = files[i];
     var fileName = file.name;
   var albumPhotosKey = encodeURIComponent(albumName) + "/";
   var photoKey = albumPhotosKey + fileName;
   // Use S3 ManagedUpload class as it supports multipart uploads
-  var upload = new AWS.S3.ManagedUpload({
-    
-    params: {
+  var params= {
       Bucket: albumBucketName,
       Key: photoKey,
       Body: file
-    },
-  });
-  
+    };
+    s3.putObject(params, function(err, data) {
+   if (err) console.log(err, err.stack); // an error occurred
+   
+   else{
+    console.log(data); 
+    voltooide++;
+    updateLoader(voltooide,files.length)
+   }     
+    })   ; 
+  }
+    }else{
 
-
-  var promise = upload.promise();
-
-
-  promise.then(
-    function(data) {
-      alert("Successfully uploaded photos.");
-    },
-    function(err) {
-      return alert("There was an error uploading your photo: ", err.message);
+       alert("Opgegeven email is niet geldig");
     }
-  );
+  
+  
+}
+function updateLoader(voltooide,total){
+  document.getElementById("loader").innerHTML=("Foto's geupload "+voltooide+"/"+total);
+  
 }
 
 </script> 
