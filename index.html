@@ -58,7 +58,9 @@
         <div class="container">
           <h1 class="jumbotron-heading">GIF Creator</h1>
           <p class="lead text-muted">Vorm hier simpel je foto's om naar een GIF, vul je email adres in en je krijgt hem toegestuurd. Vind je hem echt cool maak het dan Featured en laat andere mensen ook genieten van je kunst</p>
-          <form>
+          <form method="POST" id="fotoForm" enctype="multipart/form-data"
+          action="https://ju31c1en6e.execute-api.us-east-1.amazonaws.com/v1/upload">
+          Select File:
           <p>
             <div class="form-group">
               <label for="exampleInputEmail1">Ontvanger email</label>
@@ -66,18 +68,17 @@
               </div>
             <div class="form-group d-flex align-items-center">
               <div id="preview"></div>
-            <input type="file"  id="file-input" name="img" accept="image/*" class="form-control-file center" multiple/>
+              <input type="file" id="file-input" accept="image/*" name="file" multiple>
             
           </div>
             <div class="form-group">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Featured GIF</label>
             </div>
-            <button type="button" class="btn btn-primary" onclick="addPhoto()">Maak GIF</button>
-            <div id="loader">
-            </div>
-          </p>
-        </form>
+          <input type="button" value="Maak GIF" class="btn btn-primary" onclick="addPhoto()" >
+          <input type="submit" name="submit" hidden="true">
+        </p>
+          </form>
         </div>
       </section>
       <script>
@@ -169,28 +170,11 @@ var s3 = new AWS.S3({
     return alert("Please choose a file to upload first.");
   }
   var voltooide=0;
-  updateLoader(voltooide,files.length)
-  for(var i=0;i<files.length;i++) {
-    var file = files[i];
-    var fileName = file.name;
-  var albumPhotosKey = encodeURIComponent(albumName) + "/";
-  var photoKey = albumPhotosKey + fileName;
-  // Use S3 ManagedUpload class as it supports multipart uploads
-  var params= {
-      Bucket: albumBucketName,
-      Key: photoKey,
-      Body: file
-    };
-    s3.putObject(params, function(err, data) {
-   if (err) console.log(err, err.stack); // an error occurred
+  updateLoader(voltooide,files.length);
+  document.getElementById("fotoForm").submit.click(); 
    
-   else{
-    console.log(data); 
-    voltooide++;
-    updateLoader(voltooide,files.length)
-   }     
-    })   ; 
-  }
+    
+
     }else{
 
        alert("Opgegeven email is niet geldig");
@@ -199,7 +183,7 @@ var s3 = new AWS.S3({
   
 }
 function updateLoader(voltooide,total){
-  document.getElementById("loader").innerHTML=("Foto's geupload "+voltooide+"/"+total);
+ // document.getElementById("loader").innerHTML=("Foto's geupload "+voltooide+"/"+total);
   
 }
 
