@@ -94,6 +94,9 @@
                                             placeholder="passwoord" />
                                     </div>
                                 </div>
+                                <div class="form-row d-flex justify-content-center">
+                                    <div class="alert alert-danger col-md-3" id="alert" style="display: none; role="alert" >Er bestaat al een account met dit email adres</div>
+                                    </div>
                                 <div class="form-row">
                                     <div class="form-group col-md">
                                         <div class="form-group col-md">
@@ -125,7 +128,25 @@
             <p>Niet &copy; just enjoy</p>
         </div>
     </footer>
+    <script>
+      async function addUser(){
+        var email=document.getElementById("email").value 
+            var passwoord=document.getElementById("password").value
+            var url= "https://ju31c1en6e.execute-api.us-east-1.amazonaws.com/v1/adduser?email="+email+"&password="+passwoord
+            console.log(url)
+            let response = await fetch(url);
+            let json = await response.json();
+            if(json==="good"){
+            sessionStorage.setItem('name',email);
+            window.location.href = "index.html";
+            }else{
+                const alert = document.getElementById('alert');
+                alert.style.display = 'block';
 
+            }
+            console.log(json)
+       }
+    </script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
