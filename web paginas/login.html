@@ -94,11 +94,14 @@
                                             placeholder="passwoord" />
                                     </div>
                                 </div>
+                                <div class="form-row d-flex justify-content-center">
+                                <div class="alert alert-danger col-md-3" id="alert" style="display: none; role="alert" >Inlog gegevens kloppen niet </div>
+                                </div>
                                 <div class="form-row">
                                     <div class="form-group col-md">
                                         <div class="form-group col-md">
                                             <button type="button" class="btn btn-dark btn-block" id="button"
-                                                onclick="login()" style="display: block;">
+                                            onclick="login()" style="display: block;">
                                                 Login
                                             </button>
                                         </div>
@@ -134,6 +137,25 @@
     <script src="../../assets/js/vendor/popper.min.js"></script>
     <script src="../../dist/js/bootstrap.min.js"></script>
     <script src="../../assets/js/vendor/holder.min.js"></script> -->
+    <script>
+        async function login(){
+            var email=document.getElementById("email").value 
+            var passwoord=document.getElementById("password").value
+            var url= "https://ju31c1en6e.execute-api.us-east-1.amazonaws.com/v1/user?email="+email+"&password="+passwoord
+            console.log(url)
+            let response = await fetch(url);
+            let json = await response.json();
+            if(json==="good"){
+            sessionStorage.setItem('name',email);
+            window.location.href = "index.html";
+            }else{
+                const alert = document.getElementById('alert');
+                alert.style.display = 'block';
+
+            }
+            console.log(json)
+        }
+    </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
         </script>
