@@ -71,51 +71,44 @@
         <section class="jumbotron text-center">
             <div class="container">
                 <h1 class="jumbotron-heading">GIF Creator Login</h1>
-                <p class="lead text-muted">Vorm hier simpel je foto's om naar een GIF, vul je email adres in en je
-                    krijgt hem
-                    toegestuurd. Vind je hem echt cool maak het dan Featured en laat andere mensen ook genieten van je
-                    kunst</p>
+                <p class="lead text-muted">Vorm hier simpel je foto's om naar een GIF, vul je email adres in en je krijgt hem toegestuurd.</p>
                 <br />
 
                 <div class="container">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-sm"></div>
+                        <div class="col-6">
                             <form>
                                 <p>
-                                <div class="form-row">
-                                    <div class="form-group col-md d-flex justify-content-center">
-                                        <input type="email" id="email" name="email" class="form-control col-md-9"
+                                <div class="mb-3">
+                                    <div class="input-group mb-3">
+                                        <input type="email" id="email" name="email" class="form-control center"
                                             placeholder="example@email.com" />
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md  d-flex justify-content-center">
-                                        <input type="password" id="password" name="password" class="form-control col-md-9"
+                                <div class="mb-3">
+                                    <div class="input-group mb-3">
+                                        <input type="password" id="password" name="password" class="form-control center"
                                             placeholder="passwoord" />
                                     </div>
                                 </div>
-                                <div class="form-row d-flex justify-content-center">
-                                <div class="alert alert-danger col-md-3" id="alert" style="display: none; role="alert" >Inlog gegevens kloppen niet </div>
+                                <div class="mb-3">
+                                    <div class="alert alert-danger" id="alert" style="display: none;" role="alert" >Uw account of wachtwoord is onjuist.</div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md">
-                                        <div class="form-group col-md">
+                                <div class="mb-3">
+                                    <div class="input-group mb-3">
                                             <button type="button" class="btn btn-dark btn-block" id="button"
                                             onclick="login()" style="display: block;">
                                                 Login
                                             </button>
-                                        </div>
                                     </div>
                                 </div>
+                                    Nog geen account: <a href="register.html">Registreer</a>
+                                </p>
                             </form>
-                           Nog geen account: <a href="register.html">Registreer</a>
-
                         </div>
-
+                        <div class="col-sm"></div>
                     </div>
-                    </p>
-                    </form>
-
                 </div>
         </section>
     </main>

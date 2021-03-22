@@ -72,8 +72,7 @@
     <section class="jumbotron text-center">
       <div class="container">
         <h1 class="jumbotron-heading">GIF Creator</h1>
-        <p class="lead text-muted">Vorm hier simpel je foto's om naar een GIF, vul je email adres in en je krijgt hem
-          toegestuurd. Vind je hem echt cool maak het dan Featured en laat andere mensen ook genieten van je kunst</p>
+        <p class="lead text-muted">Vorm hier simpel je foto's om naar een GIF, vul je email adres in en je krijgt hem toegestuurd.</p>
         <br />
 
         <div class="container">
@@ -111,6 +110,7 @@
                   </div>
               </form>
               <div class="alert alert-success" id="output" role="alert" style="display: none;">
+                Files oploaded succesfully!
               </div>
               <div class="alert alert-danger" id="alert" role="alert" style="display: none;">
               </div>
@@ -271,11 +271,8 @@
     // Show succes to client
     loadGif.style.display = "none";
     button.style.display = "block";
-    const text = document.createTextNode("Files oploaded succesfully!");
     if (output.style.display === "none") {
       output.style.display = "block";
-    } else {
-      output.style.display = "none";
     }
     output.appendChild(text);
   }
